@@ -1,5 +1,5 @@
 % Read in original RGB image.
-rgbImage = imread('estel.jpg');
+rgbImage = imread('Montgri.jpg');
 % Extract color channels.
 redChannel = rgbImage(:,:,1); % Red channel
 greenChannel = rgbImage(:,:,2); % Green channel
