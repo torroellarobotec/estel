@@ -1,37 +1,49 @@
-  file = 'Montgri.jpg';
+clear all;
+pkg load image;
+#file = 'estel.jpg';
+  #file = 'EscutTorroella.png';
+  #file = 'Montgri.jpg';
+  file = 'Estrella8.png';
   ImageOrig = imread(file);
-  
   ImageRGB = imresize(ImageOrig,[60,60]);
 
-  #[Files, Columnes] = size(ImageOrig);
-  [Files, Columnes] = size(ImageRGB);
-  Columnes = Columnes / 3;
+  #[Files, Columnes] = size(ImageRGB);
+  #Columnes = Columnes / 3;
   
-  c = 0;
+  #c = 3600;
   vectorRGB = "";
-  
-  vectorImage = zeros(3600,3);
+  Columnes = 60;
 
-  for i = 1:Columnes
-    for j = 1:Files
-
-      c = c+1;
-      
-      pixelRGB = impixel(ImageRGB,i,j);
+  while Columnes >= 1    
+    #Files parelles
+    Files = 60;
+    while Files >= 1
+      pixelRGB = impixel(ImageRGB, Columnes, Files);
       R = pixelRGB(1); 
       G = pixelRGB(2);
-      B = pixelRGB(3);
-      
-      vectorImage(c,1) = R;
-      vectorImage(c,2) = G;
-      vectorImage(c,3) = B;
-      
+      B = pixelRGB(3);          
       vectorRGB = strcat(vectorRGB, "{", num2str(R) , "," , num2str(G) , "," , num2str(B) ,"},");      
-    endfor
-  endfor
+      Files = Files - 1;
+    endwhile
+    
+    Columnes = Columnes - 1;
+    #Files senars
+    Files = 1;
+    while Files <= 60
+      pixelRGB = impixel(ImageRGB, Columnes, Files);
+      R = pixelRGB(1); 
+      G = pixelRGB(2);
+      B = pixelRGB(3);          
+      vectorRGB = strcat(vectorRGB, "{", num2str(R) , "," , num2str(G) , "," , num2str(B) ,"},");      
+      Files = Files + 1;    
+    endwhile
+    
+    Columnes = Columnes -1;
+  endwhile
+    
+  #save EscutTorroella.txt vectorRGB;
+  #save Montgri.txt vectorRGB;
+  save Estrella8.txt vectorRGB;
 
-  #NewFile = strcat(file, ".txt");
-  save Montgri.txt vectorRGB;
-
+  
   imshow(ImageRGB);
-  #imshow(ImageOrig);

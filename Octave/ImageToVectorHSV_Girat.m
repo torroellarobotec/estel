@@ -13,9 +13,9 @@ pkg load image;
     #Files parelles
     Files = 60;
     while Files >= 1
-      H = ImageHSV(Files, Columnes, 1);      
-      S = ImageHSV(Files, Columnes, 2);
-      V = ImageHSV(Files, Columnes, 3);
+      H = ImageHSV(Columnes, Files, 1);      
+      S = ImageHSV(Columnes, Files, 2);
+      V = ImageHSV(Columnes, Files, 3);
     
       vectorHSV = strcat(vectorHSV, "{", num2str(round(H*360)), "," , num2str(round(S*255)) , "," , num2str(round(V*255)) ,"},");    
       Files = Files - 1;
@@ -25,9 +25,9 @@ pkg load image;
     #Files senars
     Files = 1;
     while Files <= 60
-      H = ImageHSV(Files, Columnes, 1);
-      S = ImageHSV(Files, Columnes, 2);
-      V = ImageHSV(Files, Columnes, 3);
+      H = ImageHSV(Columnes, Files, 1);
+      S = ImageHSV(Columnes, Files, 2);
+      V = ImageHSV(Columnes, Files, 3);
       
       vectorHSV = strcat(vectorHSV, "{", num2str(round(H*360)), "," , num2str(round(S*255)) , "," , num2str(round(V*255)) ,"},");      
       Files = Files + 1;    
@@ -36,6 +36,6 @@ pkg load image;
     Columnes = Columnes -1;
   endwhile
     
-  save Estrella8HSV.txt vectorHSV;
+  save Estrella8HSV_Girat.txt vectorHSV;
   
   imshow(ImageRGB);
