@@ -78,11 +78,13 @@ void EfecteCel(int estrella)
 
       if (Estrelles[estrella][led][0]==0 and  Estrelles[estrella][led][1]==0 and Estrelles[estrella][led][2]==0)
       {  
-        leds[led] = CHSV(
-                          random(200*(255/360),250*(255/360)), /*H*/
-                          255, /*S*/
-                          random(25*(255/100),100*(255/100)) /*V*/
-                          );
+        leds[led] = CRGB(random(255),random(255),255);
+        //leds[led] = CHSV(HUE_AQUA,255,255);
+        //leds[led] = CHSV(
+        //                  random(200*(255/360),250*(255/360)), /*H*/
+        //                  255, /*S*/
+        //                  random(25*(255/100),100*(255/100)) /*V*/
+        //                  );
       }
   }
 }
@@ -248,6 +250,7 @@ void loop() {
 
   /////////////////////////////////////// MATRIU /////////////////////////////////////////////////////////
 
+
   for(int NumEstrella = 0; NumEstrella <8; NumEstrella++)
   {    
     //Carreguem la imatge a la matriu de leds
@@ -263,10 +266,11 @@ void loop() {
       PintarEstrella(NumEstrella);
       EfecteCel(NumEstrella);    
       FastLED.show();
-      FastLED.delay(150);
+      FastLED.delay(300);
       TempsActual = millis();
     }
-  
+
+  /*
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Animació 2 Pintar l'estrella tira a tira///////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -296,5 +300,7 @@ void loop() {
       FastLED.delay(300);
       TempsActual = millis();    
     }  
-  }  
+    */
+  }
+  
 }
