@@ -36,6 +36,6 @@ pkg load image;
     Columnes = Columnes -1;
   endwhile
     
-  save EstelColorsHSV.txt vectorHSV;
+  save EstelColors8HSV.txt vectorHSV;
   
   imshow(ImageRGB);
