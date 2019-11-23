@@ -1,14 +1,14 @@
 #include "FastLED.h"
 #define UPDATES_PER_SECOND 100
 #define NUM_LEDS 3600 //60x60
-#define NUM_LEDS_CUA_1 576 //144(leds) x 4 (tires)  Tira 1 (0-143) Tira 2 (144-287) Tira 3 (288-431) Tira 4 (432-575)
-#define NUM_LEDS_CUA_2 576 //144(leds) x 4 (tires)  Tira 1 (0-143) Tira 2 (144-287) Tira 3 (288-431) Tira 4 (432-575)
-#define NUM_LEDS_CUA_3 576 //144(leds) x 4 (tires)  Tira 1 (0-143) Tira 2 (144-287) Tira 3 (288-431) Tira 4 (432-575)
+#define NUM_LEDS_CUA_1 573 //144(leds) x 4 (tires)  Tira 1 (0-141) Tira 2 (142-285) Tira 3 (286-429) Tira 4 (430-573)
+#define NUM_LEDS_CUA_2 573 //144(leds) x 4 (tires)  Tira 1 (0-141) Tira 2 (142-285) Tira 3 (286-429) Tira 4 (430-573)
+#define NUM_LEDS_CUA_3 573 //144(leds) x 4 (tires)  Tira 1 (0-141) Tira 2 (142-285) Tira 3 (286-428) Tira 4 (430-573)
 
 #define DATA_PIN 9
 #define DATA_PIN_CUA_1 8
-#define DATA_PIN_CUA_2 10 //???
-#define DATA_PIN_CUA_3 11 //???
+#define DATA_PIN_CUA_2 7 //???
+#define DATA_PIN_CUA_3 6 //???
 #define BRIGHTNESS  120
 
 #define NumEstelsAleatoris 20
@@ -101,7 +101,7 @@ void PintarEstrellaTiraPerTira(int estrella)
         leds[tira*60+led] = CHSV((Estrelles[estrella][tira*60+led][0]), (Estrelles[estrella][tira*60+led][1]), (Estrelles[estrella][tira*60+led][2]));        
       }
       FastLED.show();
-      FastLED.delay(100);
+      FastLED.delay(50);
     }    
 }
 
@@ -111,7 +111,7 @@ void FillLEDsFromPaletteColors( uint8_t colorIndex)
 {
     uint8_t brightness = 255;
     
-    for( int i = 0; i < NUM_LEDS; i++) {
+    for( int i = 0; i < NUM_LEDS_CUA_1; i++) {
         leds_cua_1[i] = ColorFromPalette( currentPalette, colorIndex, brightness, currentBlending);
         leds_cua_2[i] = ColorFromPalette( currentPalette, colorIndex, brightness, currentBlending);
         leds_cua_3[i] = ColorFromPalette( currentPalette, colorIndex, brightness, currentBlending);
@@ -206,14 +206,15 @@ const TProgmemPalette16 myRedWhiteBluePalette_p PROGMEM =
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-//Efecte Fade IN
-void FadeIn(CRGB *_leds, int _cleds, int estrella)
-{ 
-  for(int brillo =0; brillo<255; brillo++)
+//Efecte Fade OUT
+//void FadeOut(CRGB *_leds, int _cleds, int estrella)
+void FadeOut(int estrella)
+{    
+  for(int brillo=50; brillo<=255; brillo++)
   {
-    for(int led=0;led<_cleds;led++)
+    for(int led=0;led<NUM_LEDS;led++)
     {
-      _leds[led] = CHSV(Estrelles[estrella][led][0], Estrelles[estrella][led][1], brillo);
+      leds[led].fadeLightBy(brillo); 
     }
     FastLED.show();
     FastLED.delay(15);
@@ -222,19 +223,28 @@ void FadeIn(CRGB *_leds, int _cleds, int estrella)
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-//Efecte Fade OUT
-void FadeOut(CRGB *_leds, int _cleds, int estrella)
-{ 
-  for(int brillo =255; brillo>=0; brillo--)
+//Efecte Fade IN
+  //void FadeIn(CRGB *_leds, int _cleds, int estrella)
+  void FadeIn(int estrella)
   {
-    for(int led=0;led<_cleds;led++)
+    PintarEstrella(estrella);
+    for(int led=0; led < NUM_LEDS; led++)
     {
-      _leds[led] = CHSV(Estrelles[estrella][led][0], Estrelles[estrella][led][1], brillo);
+      //CHSV((Estrelles[estrella][i][0]), (Estrelles[estrella][i][1]), (Estrelles[estrella][i][2]));
+      leds[led] = CHSV((Estrelles[estrella][led][0]), (Estrelles[estrella][led][1]), 255);
     }
     FastLED.show();
-    FastLED.delay(15);
+    /*for(int brillo=0; brillo<255; brillo++)
+    {
+      for(int led=0;led<NUM_LEDS;led++)
+      {
+        leds[led] = CHSV((Estrelles[estrella][led][0]), (Estrelles[estrella][led][1]), brillo);
+        //leds[led].maximizeBrightness();
+      }
+      FastLED.show();
+      FastLED.delay(15);
+    }*/
   }
-}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -247,18 +257,34 @@ void loop() {
     //static uint8_t startIndex = 0;
     //startIndex = startIndex + 1; /* motion speed */  
     //FillLEDsFromPaletteColors( startIndex);
+    //FastLED.delay(1000 / UPDATES_PER_SECOND);
 
   /////////////////////////////////////// MATRIU /////////////////////////////////////////////////////////
 
+    //CUA
+    FastLED.clear();
+    FastLED.show();
+    for (int i=0; i<NUM_LEDS_CUA_1; i++)
+    {
+      //leds_cua_1[i] = CRGB(random(255),random(255),random(255));
+      leds_cua_2[i] = CRGB(random(255),random(255),random(255));
+      //leds_cua_3[i] = CRGB(random(255),random(255),random(255));
+      FastLED.show();
+    }
+    
+    //FastLED.show();
 
   for(int NumEstrella = 0; NumEstrella <8; NumEstrella++)
   {    
+    
+    
     //Carreguem la imatge a la matriu de leds
     //int NumEstrella = 1;  
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Animació 1 Pintar l'estrella i posar l'efecte del cel//////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /*FastLED.clear();
     TempsInicial = millis();
     TempsActual = millis();
     while(TempsActual < TempsInicial + TempsTransicio)
@@ -269,38 +295,39 @@ void loop() {
       FastLED.delay(300);
       TempsActual = millis();
     }
-
-  /*
+    */
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Animació 2 Pintar l'estrella tira a tira///////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /*
+    FastLED.clear();
     TempsInicial = millis();
     TempsActual = millis();
     while(TempsActual < TempsInicial + TempsTransicio)
     {
       PintarEstrellaTiraPerTira(NumEstrella);  
       FastLED.show();
-      FastLED.delay(500);
+      //FastLED.delay(50);
       TempsActual = millis();    
     }
-  
-  
+    */   
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Animació 3 Pintar l'estrella fade in fade out ////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /*
     TempsInicial = millis();
     TempsActual = millis();
     while(TempsActual < TempsInicial + TempsTransicio)
-    {
-      FadeIn(leds, NUM_LEDS, NumEstrella);
-      FastLED.show();
-      FastLED.delay(300);
-      FadeOut(leds, NUM_LEDS, NumEstrella);
-      FastLED.show();
-      FastLED.delay(300);
+    {      
+      //FadeIn(NumEstrella);
+      //FastLED.show();
+      //FastLED.delay(300);
+      FadeOut(NumEstrella);
+      //FastLED.show();
+      //FastLED.delay(300);
       TempsActual = millis();    
     }  
-    */
+   */
   }
   
 }
