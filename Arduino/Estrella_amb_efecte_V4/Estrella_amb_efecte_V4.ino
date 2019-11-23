@@ -57,6 +57,17 @@ void setup() {
   currentBlending = LINEARBLEND;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void NetejarMatriu()
+{
+  for(int i=0;i<NUM_LEDS;i++)
+  {
+    leds[i] = CRGB(0,0,0);    
+  }
+  FastLED.show();
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void PintarEstrella(int estrella)
@@ -93,7 +104,8 @@ void EfecteCel(int estrella)
 
 void PintarEstrellaTiraPerTira(int estrella)
 {
-    FastLED.clear();
+    NetejarMatriu();
+    //FastLED.clear();
     for(int tira=0;tira<60;tira++)
     {
       for(int led=0; led<60;led++)
@@ -227,23 +239,15 @@ void FadeOut(int estrella)
   //void FadeIn(CRGB *_leds, int _cleds, int estrella)
   void FadeIn(int estrella)
   {
-    PintarEstrella(estrella);
-    for(int led=0; led < NUM_LEDS; led++)
-    {
-      //CHSV((Estrelles[estrella][i][0]), (Estrelles[estrella][i][1]), (Estrelles[estrella][i][2]));
-      leds[led] = CHSV((Estrelles[estrella][led][0]), (Estrelles[estrella][led][1]), 255);
-    }
-    FastLED.show();
-    /*for(int brillo=0; brillo<255; brillo++)
+    for(int brillo=50; brillo<=255; brillo++)
     {
       for(int led=0;led<NUM_LEDS;led++)
       {
-        leds[led] = CHSV((Estrelles[estrella][led][0]), (Estrelles[estrella][led][1]), brillo);
-        //leds[led].maximizeBrightness();
+        leds[led].fadeLightBy(brillo*-1); 
       }
       FastLED.show();
       FastLED.delay(15);
-    }*/
+    }
   }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -262,29 +266,27 @@ void loop() {
   /////////////////////////////////////// MATRIU /////////////////////////////////////////////////////////
 
     //CUA
-    FastLED.clear();
-    FastLED.show();
     for (int i=0; i<NUM_LEDS_CUA_1; i++)
     {
-      //leds_cua_1[i] = CRGB(random(255),random(255),random(255));
+      leds_cua_1[i] = CRGB(random(255),random(255),random(255));
       leds_cua_2[i] = CRGB(random(255),random(255),random(255));
-      //leds_cua_3[i] = CRGB(random(255),random(255),random(255));
-      FastLED.show();
+      leds_cua_3[i] = CRGB(random(255),random(255),random(255)); 
     }
+    FastLED.show();
     
     //FastLED.show();
 
-  for(int NumEstrella = 0; NumEstrella <8; NumEstrella++)
-  {    
+  //for(int NumEstrella = 0; NumEstrella <8; NumEstrella++)
+  //{    
     
     
     //Carreguem la imatge a la matriu de leds
-    //int NumEstrella = 1;  
+    int NumEstrella = 1;  
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Animació 1 Pintar l'estrella i posar l'efecte del cel//////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /*FastLED.clear();
+    //FastLED.clear();
     TempsInicial = millis();
     TempsActual = millis();
     while(TempsActual < TempsInicial + TempsTransicio)
@@ -295,12 +297,12 @@ void loop() {
       FastLED.delay(300);
       TempsActual = millis();
     }
-    */
+    
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Animació 2 Pintar l'estrella tira a tira///////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /*
-    FastLED.clear();
+    
+    //FastLED.clear();
     TempsInicial = millis();
     TempsActual = millis();
     while(TempsActual < TempsInicial + TempsTransicio)
@@ -310,11 +312,11 @@ void loop() {
       //FastLED.delay(50);
       TempsActual = millis();    
     }
-    */   
+    
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Animació 3 Pintar l'estrella fade in fade out ////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /*
+    
     TempsInicial = millis();
     TempsActual = millis();
     while(TempsActual < TempsInicial + TempsTransicio)
@@ -327,7 +329,7 @@ void loop() {
       //FastLED.delay(300);
       TempsActual = millis();    
     }  
-   */
-  }
+   
+  //}
   
 }
