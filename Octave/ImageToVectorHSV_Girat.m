@@ -1,7 +1,7 @@
 clear all;
 pkg load image;
 
-  file = 'Estrella8.png';
+  file = 'estel.jpg';
   ImageOrig = imread(file);
   ImageRGB = imresize(ImageOrig,[60,60]);
   ImageHSV = rgb2hsv (ImageRGB);
@@ -17,7 +17,7 @@ pkg load image;
       S = ImageHSV(Columnes, Files, 2);
       V = ImageHSV(Columnes, Files, 3);
     
-      vectorHSV = strcat(vectorHSV, "{", num2str(round(H*360)), "," , num2str(round(S*255)) , "," , num2str(round(V*255)) ,"},");    
+      vectorHSV = strcat(vectorHSV, "{", num2str(round(H*255)), "," , num2str(round(S*255)) , "," , num2str(round(V*255)) ,"},");    
       Files = Files - 1;
     endwhile
     
@@ -29,13 +29,13 @@ pkg load image;
       S = ImageHSV(Columnes, Files, 2);
       V = ImageHSV(Columnes, Files, 3);
       
-      vectorHSV = strcat(vectorHSV, "{", num2str(round(H*360)), "," , num2str(round(S*255)) , "," , num2str(round(V*255)) ,"},");      
+      vectorHSV = strcat(vectorHSV, "{", num2str(round(H*255)), "," , num2str(round(S*255)) , "," , num2str(round(V*255)) ,"},");      
       Files = Files + 1;    
     endwhile
     
     Columnes = Columnes -1;
   endwhile
     
-  save Estrella8HSV_Girat.txt vectorHSV;
+  save estelHSV_Girat.txt vectorHSV;
   
   imshow(ImageRGB);

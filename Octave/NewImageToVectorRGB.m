@@ -1,7 +1,7 @@
   #file = 'estel.jpg';
   #file = 'EscutTorroella.png';
   #file = 'Montgri.jpg';
-  file = 'ModelEstrella.png';
+  file = 'estel.jpg';
   ImageOrig = imread(file);
   ImageRGB = imresize(ImageOrig,[60,60]);
 
@@ -41,7 +41,7 @@
     
   #save EscutTorroella.txt vectorRGB;
   #save Montgri.txt vectorRGB;
-  save ModelEstrella.txt vectorRGB;
+  save Estel.txt vectorRGB;
 
   
   imshow(ImageRGB);

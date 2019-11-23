@@ -1,7 +1,7 @@
 clear all;
 pkg load image;
 
-  file = 'Estrella7.png';
+  file = 'Estrella8.png';
   ImageOrig = imread(file);
   ImageRGB = imresize(ImageOrig,[60,60]);
   ImageHSV = rgb2hsv (ImageRGB);
@@ -36,6 +36,6 @@ pkg load image;
     Columnes = Columnes -1;
   endwhile
     
-  save Estrella7HSV.txt vectorHSV;
+  save Estrella8HSV.txt vectorHSV;
   
   imshow(ImageRGB);
