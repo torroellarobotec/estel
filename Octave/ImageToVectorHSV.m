@@ -1,7 +1,7 @@
 clear all;
 pkg load image;
 
-  file = 'estel-colors.png';
+  file = 'estel-groc.png';
   ImageOrig = imread(file);
   ImageRGB = imresize(ImageOrig,[60,60]);
   ImageHSV = rgb2hsv (ImageRGB);
@@ -36,6 +36,6 @@ pkg load image;
     Columnes = Columnes -1;
   endwhile
     
-  save EstelColorsHSV.txt vectorHSV;
+  save EstelGrocHSV.txt vectorHSV;
   
   imshow(ImageRGB);
