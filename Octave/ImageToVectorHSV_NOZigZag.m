@@ -1,7 +1,7 @@
 clear all;
 pkg load image;
 
-  file = 'estel-groc-cua.png';
+  file = 'estel-deg-cua.png';
   ImageOrig = imread(file);
   ImageRGB = imresize(ImageOrig,[1,142]);
   ImageHSV = rgb2hsv (ImageRGB);
@@ -23,6 +23,6 @@ pkg load image;
     Files = Files + 1;
   endwhile
     
-  save EstelGrocCuaHSV.txt vectorHSV;
+  save EstelDegCuaHSV.txt vectorHSV;
   
   imshow(ImageRGB);
