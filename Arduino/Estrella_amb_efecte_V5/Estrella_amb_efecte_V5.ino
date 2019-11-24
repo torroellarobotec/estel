@@ -1,7 +1,7 @@
 #include "FastLED.h"
 #define UPDATES_PER_SECOND 100
 #define NUM_LEDS 3600 //60x60
-#define NUM_LEDS_CUA 142
+#define NUM_LEDS_CUA 573
 #define NUM_LEDS_CUA_1 573 // Cua 1 4 (trams)  Tram 1 (0-141) Tram 2 (142-285) Tram 3 (286-429) Tram 4 (430-573)
 #define NUM_LEDS_CUA_2 573 // Cua 2 4 (trams)  Tram 1 (0-141) Tram 2 (142-285) Tram 3 (286-429) Tram 4 (430-573)
 #define NUM_LEDS_CUA_3 573 // Cua 3 4 (trams)  Tram 1 (0-141) Tram 2 (142-285) Tram 3 (286-428) Tram 4 (430-573)
@@ -217,30 +217,30 @@ void PintarCua(const uint8_t cua[NUM_LEDS_CUA][3])
     //Tram 1
     for(int i=0; i<142; i++)
     {
-      leds_cua_1[i] = CHSV(cua[j][0], cua[j][1], cua[j][2]);
-      leds_cua_2[i] = CHSV(cua[j][0], cua[j][1], cua[j][2]);
-      leds_cua_3[i] = CHSV(cua[j][0], cua[j][1], cua[j][2]);
+      leds_cua_1[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);
+      leds_cua_2[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);
+      leds_cua_3[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);
     }
     //Tram 2
     for(int i=142; i<286; i++)
     {
-      leds_cua_1[i] = CHSV(cua[j][0], cua[j][1], cua[j][2]);
-      leds_cua_2[i] = CHSV(cua[j][0], cua[j][1], cua[j][2]);
-      leds_cua_3[i] = CHSV(cua[j][0], cua[j][1], cua[j][2]);    
+      leds_cua_1[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);
+      leds_cua_2[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);
+      leds_cua_3[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);    
     }
     //Tram 3
     for(int i=286; i<430; i++)
     {
-      leds_cua_1[i] = CHSV(cua[j][0], cua[j][1], cua[j][2]);
-      leds_cua_2[i] = CHSV(cua[j][0], cua[j][1], cua[j][2]);
-      leds_cua_3[i] = CHSV(cua[j][0], cua[j][1], cua[j][2]);    
+      leds_cua_1[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);
+      leds_cua_2[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);
+      leds_cua_3[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);    
     }
     //Tram 4  
     for(int i=430; i<573; i++)
     {
-      leds_cua_1[i] = CHSV(cua[j][0], cua[j][1], cua[j][2]);
-      leds_cua_2[i] = CHSV(cua[j][0], cua[j][1], cua[j][2]);
-      leds_cua_3[i] = CHSV(cua[j][0], cua[j][1], cua[j][2]);
+      leds_cua_1[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);
+      leds_cua_2[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);
+      leds_cua_3[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);
     }
   }
 }
@@ -271,6 +271,31 @@ void FadeInFadeOut(int estrella)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void loop() {
+
+
+  for(int i=0; i<142; i++)
+  {
+    //Tram 1
+    leds_cua_1[i] =     CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
+    leds_cua_2[i] =     CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
+    leds_cua_3[i] =     CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
+
+    //Tram 2
+    leds_cua_1[i+142] = CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
+    leds_cua_2[i] =     CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
+    leds_cua_3[i] =     CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
+
+    //Tram 3
+    leds_cua_1[i+286] = CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
+    leds_cua_2[i] =     CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
+    leds_cua_3[i] =     CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
+
+    //Tram 4
+    leds_cua_1[i+430] = CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
+    leds_cua_2[i] =     CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
+    leds_cua_3[i] =     CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
+  }
+
   //PintarCua(CuaEstelGroc);
   //NetejarCua();
   PintarEstrella(9);  
