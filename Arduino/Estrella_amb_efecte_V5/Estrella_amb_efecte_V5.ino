@@ -211,37 +211,27 @@ void FadeOut(int estrella)
 
 void PintarCua(const uint8_t cua[NUM_LEDS_CUA][3])
 {
-  //Les imatges de degradats de colors tenen 142 pixels
-  for(int j=0; j<142; j++)
+  for(int i=0; i<142; i++)
   {
     //Tram 1
-    for(int i=0; i<142; i++)
-    {
-      leds_cua_1[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);
-      leds_cua_2[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);
-      leds_cua_3[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);
-    }
+    leds_cua_1[i] =     CHSV(cua[i][0], cua[i][1], cua[i][2]);
+    leds_cua_2[i] =     CHSV(cua[i][0], cua[i][1], cua[i][2]);
+    leds_cua_3[i] =     CHSV(cua[i][0], cua[i][1], cua[i][2]);
+
     //Tram 2
-    for(int i=142; i<286; i++)
-    {
-      leds_cua_1[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);
-      leds_cua_2[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);
-      leds_cua_3[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);    
-    }
+    leds_cua_1[i+142] = CHSV(cua[i][0], cua[i][1], cua[i][2]);
+    leds_cua_2[i+142] = CHSV(cua[i][0], cua[i][1], cua[i][2]);
+    leds_cua_3[i+142] = CHSV(cua[i][0], cua[i][1], cua[i][2]);
+
     //Tram 3
-    for(int i=286; i<430; i++)
-    {
-      leds_cua_1[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);
-      leds_cua_2[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);
-      leds_cua_3[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);    
-    }
-    //Tram 4  
-    for(int i=430; i<573; i++)
-    {
-      leds_cua_1[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);
-      leds_cua_2[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);
-      leds_cua_3[i] = CHSV(CuaEstelGroc[j][0], CuaEstelGroc[j][1], CuaEstelGroc[j][2]);
-    }
+    leds_cua_1[i+286] = CHSV(cua[i][0], cua[i][1], cua[i][2]);
+    leds_cua_2[i+286] = CHSV(cua[i][0], cua[i][1], cua[i][2]);
+    leds_cua_3[i+286] = CHSV(cua[i][0], cua[i][1], cua[i][2]);
+
+    //Tram 4
+    leds_cua_1[i+430] = CHSV(cua[i][0], cua[i][1], cua[i][2]);
+    leds_cua_2[i+430] = CHSV(cua[i][0], cua[i][1], cua[i][2]);
+    leds_cua_3[i+430] = CHSV(cua[i][0], cua[i][1], cua[i][2]);
   }
 }
 
@@ -272,7 +262,7 @@ void FadeInFadeOut(int estrella)
 
 void loop() {
 
-
+  /*
   for(int i=0; i<142; i++)
   {
     //Tram 1
@@ -282,21 +272,22 @@ void loop() {
 
     //Tram 2
     leds_cua_1[i+142] = CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
-    leds_cua_2[i] =     CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
-    leds_cua_3[i] =     CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
+    leds_cua_2[i+142] = CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
+    leds_cua_3[i+142] = CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
 
     //Tram 3
     leds_cua_1[i+286] = CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
-    leds_cua_2[i] =     CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
-    leds_cua_3[i] =     CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
+    leds_cua_2[i+286] = CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
+    leds_cua_3[i+286] = CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
 
     //Tram 4
     leds_cua_1[i+430] = CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
-    leds_cua_2[i] =     CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
-    leds_cua_3[i] =     CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
+    leds_cua_2[i+430] = CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
+    leds_cua_3[i+430] = CHSV(CuaEstelGroc[i][0], CuaEstelGroc[i][1], CuaEstelGroc[i][2]);
   }
+  */
 
-  //PintarCua(CuaEstelGroc);
+  PintarCua(CuaEstelGroc);
   //NetejarCua();
   PintarEstrella(9);  
   EfecteCel(9);
