@@ -3,7 +3,7 @@ pkg load image;
 
   file = 'estel-groc-cua.png';
   ImageOrig = imread(file);
-  ImageRGB = imresize(ImageOrig,[1,280]);
+  ImageRGB = imresize(ImageOrig,[1,573]);
   ImageHSV = rgb2hsv (ImageRGB);
   
   vectorHSV = "";
@@ -11,7 +11,7 @@ pkg load image;
   Files = 1;
   while Files <= 1    
     Columnes = 1;
-    while Columnes <= 280
+    while Columnes <= 573
       H = ImageHSV(Files, Columnes, 1);      
       S = ImageHSV(Files, Columnes, 2);
       V = ImageHSV(Files, Columnes, 3);
@@ -23,6 +23,6 @@ pkg load image;
     Files = Files + 1;
   endwhile
     
-  save EstelGrocCuaHSV_30x30.txt vectorHSV;
+  save EstelGrocCuaHSV_60x60.txt vectorHSV;
   
   imshow(ImageRGB);
