@@ -7,10 +7,10 @@
 #define NUM_LEDS_CUA_2 572 // Cua 2 4 (trams)  Tram 1 (0-141) Tram 2 (142-284) Tram 3 (285-428) Tram 4 (429-572)
 #define NUM_LEDS_CUA_3 572 // Cua 3 4 (trams)  Tram 1 (0-141) Tram 2 (142-284) Tram 3 (285-428) Tram 4 (429-572)
 
-#define DATA_PIN 9 //Matriu
+#define DATA_PIN 6 //Matriu
 #define DATA_PIN_CUA_1 8 //cua 1
 #define DATA_PIN_CUA_2 7 //cua 2
-#define DATA_PIN_CUA_3 6 //cua 3
+#define DATA_PIN_CUA_3 9 //cua 3
 #define BRIGHTNESS  120
 
 #define NumEstelsAleatoris 20
@@ -83,11 +83,11 @@ const uint8_t CuaEstelVerd[NUM_LEDS_CUA][3]{
 
 void setup() {
   //Per deshabilitar les sortides de l'alimentador de voltatge
-  digitalWrite(5, HIGH);
+  //digitalWrite(5, HIGH);
     
   delay( 1000 ); // power-up safety delay
 
-  set_max_power_in_volts_and_milliamps(12,10000);
+  //set_max_power_in_volts_and_milliamps(12,10000);
   
   FastLED.addLeds<WS2812B, DATA_PIN, GRB>(leds, NUM_LEDS).setCorrection(TypicalSMD5050);
   FastLED.addLeds<WS2812B, DATA_PIN_CUA_1, GRB>(leds_cua_1, NUM_LEDS_CUA_1).setCorrection(TypicalSMD5050);
@@ -251,29 +251,39 @@ void EfecteFadeIn()
 void loop() {
 
   //Per habilitar les sortides del convertidor de voltatge
-  digitalWrite(5, HIGH);
-  
-  TempsInicial = millis();
-  TempsActual = millis();
+  //digitalWrite(5, HIGH);
 
-  PintarCua();
-  
-  while(TempsActual < TempsInicial + TempsTransicio)
-  {      
-    PintarEstrella();
-    EVERY_N_MILLISECONDS(1000){EfecteCel();}
-    FastLED.show();
-    delay(150);
-    TempsActual = millis();    
-  } 
-  
+  for(int i=0; i<NUM_LEDS;i++)
+  {
+    leds[i] = CRGB(0,255,0);    
+  }
+
   FastLED.show();
+  delay(150);
+  
+  //TempsInicial = millis();
+  //TempsActual = millis();
+
+  
+  //PintarCua();
+  
+  //while(TempsActual < TempsInicial + TempsTransicio)
+  //{      
+  //  PintarEstrella();
+  //  EVERY_N_MILLISECONDS(1000){EfecteCel();}
+  //  FastLED.show();
+  //  delay(150);
+  //  TempsActual = millis();    
+  //} 
+  
+  /*FastLED.show();
   delay(150);
   EfecteFadeOut();
   EfecteFadeIn();
   FastLED.show();
   delay(1000);
 
-  PintarCuaAmbTrams(4);
+  PintarCuaAmbTrams(4);*/
+  
   //EVERY_N_MILLISECONDS(30000){PintarCuaAmbTrams(4);}
 }
