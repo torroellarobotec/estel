@@ -1,7 +1,7 @@
 clear all;
 pkg load image;
 
-  file = 'Estrella8.png';
+  file = 'EstrellaDeNavidad.jpg';
   ImageOrig = imread(file);
   ImageRGB = imresize(ImageOrig,[58,58]);
   #ImageRGB = ImageOrig;
@@ -37,6 +37,6 @@ pkg load image;
     Columnes = Columnes -1;
   endwhile
     
-  save Estrella_8_HSV_58x58.txt vectorHSV;
+  save EstrellaDeNavidad_HSV_58x58.txt vectorHSV;
   
   imshow(ImageRGB);
